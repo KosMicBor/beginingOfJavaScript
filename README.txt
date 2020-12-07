@@ -1,0 +1,1 @@
+It is the repository for studing of JavaScript
