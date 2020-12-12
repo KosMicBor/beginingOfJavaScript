@@ -93,7 +93,7 @@ function mathOperation(arg1, arg2, operation) {
  * @param {*} num число, которое будет сравниваться со значениями из массива 
  */
 function checkFunc(num) {
-    let numbers = ["1", "2", "3", "4"];
+    let numbers = ["2", "3", "4"];
     let rezult = 0;
     for (let i = 0; i < numbers.length; i++) {
         if (num === numbers[i]) {
