@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson_4</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+        /*
+        1. Написать функцию, преобразующую число в объект. Передавая на
+        вход число в диапазоне [0, 999],
+        мы должны получить на выходе объект, в котором в соответствующих свойствах описаны разряды числа:
+        - единицы (в свойстве units)
+        - десятки (в свойстве tens)
+        - сотни (в свойстве hundereds)
+        Например, для числа 45 мы должны получить следующий объект:
+        {
+         units: 5, //это единицы
+         tens: 4, //это десятки
+         hundreds: 0, //это сотни
+        }
+        Если число было передано вне [0, 999] диапазона, не целое число или вообще не число,
+        необходимо выдать соответствующее сообщение с помощью console.log и вернуть пустой объект.
+        */
+
+        function numToObj() {
+            let userNumber = parseInt(prompt('Введите целое число от 0 до 999 цифрами (для выхода введите не число):'));
+            let numArr = [];
+            let numObj = {
+                units: 0,
+                tens: 0,
+                hundreds: 0
+            };
+            if (0 <= userNumber <= 999) {
+                userNumber = userNumber.toString();
+                numArr = userNumber.split('');
+                if (Math.floor(userNumber / 100) !== 0) {
+                    numObj.hundreds = numArr[0];
+                    numObj.tens = numArr[1];
+                    numObj.units = numArr[2];
+                    console.log(numObj);
+                } else if (Math.floor(userNumber / 10) !== 0) {
+                    numObj.tens = numArr[0];
+                    numObj.units = numArr[1];
+                    console.log(numObj);
+                } else {
+                    numObj.units = numArr[0];
+                    console.log(numObj);
+                }
+
+            } else if (isNaN(userNumber)) {
+                alert('Всего хорошего');
+            } else {
+                alert('Нужно было ввести только числа из диапазона от 0 до 999 ЦИФРАМИ!!!');
+                numToObj();
+            }
+
+        }
+
+        numToObj();
+
+        /*1.1 Сделайте в стиле es5, а затем в стиле es6 (по аналогии из урока), конструктор Product, который принимает
+        параметры name и price, сохраните их как свойства объекта. Также объекты типа Product должны иметь метод
+        make25PercentDiscount, который будет уменьшать цену в объекте на 25%. Имейте в виду, что метод
+        make25PercentDiscount не должен быть внутри функции-конструктора, и также не нужно создавать отдельный
+        объект-прототип (как объект transport в уроке).*/
+
+        function Product(name, price) {
+            this.name = name;
+            this.price = price;
+            // this.make25PercentDiscount = function (discount) {
+            //     this.price = price - (this.price / 100 * discount);
+            // };
+        }
+        function make25PercentDiscount(price) {
+            return price * 0.75;
+
+        }
+        let products = [
+            new Product('мелкая ёлка', 300),
+            new Product('не очень мелкая ёлка', 400),
+            new Product('ёлка с намёком на праздник', 600)
+        ];
+        // for (let product of products) {
+        //     product.make25PercentDiscount(25);
+        // }
+        for (let product of products) {
+            product.price = make25PercentDiscount(product.price);
+        }
+        console.log(products);
+
+        class Product_es6 {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            }
+        }
+        let products_es6 = [
+            new Product('мелкая ёлка', 300),
+            new Product('не очень мелкая ёлка', 400),
+            new Product('ёлка с намёком на праздник', 600)
+        ];
+        for (let product of products_es6) {
+            product.price = make25PercentDiscount(product.price);
+        }
+        console.log(products_es6);
+
+        /*1.2 Сделайте в стиле es5, а затем в стиле es6 (по аналогии из урока),
+        а) конструктор Post, который принимает параметры author, text, date и сохраняет их как свойства объекта. Объекты
+        типа Post должны иметь метод edit, который будет принимать текст и записывать его в свойство text объекта.
+        б) конструктор AttachedPost, который принимает параметры author, text, date. Проинициализируйте эти свойства с
+        помощью конструктора Post, чтобы не дублировать код. Также в конструкторе AttachedPost должно создаваться
+        свойство highlighted со значением false. Унаследуйте в объектах типа AttachedPost методы из Post.
+        Объекты типа AttachedPost должны иметь метод makeTextHighlighted, который будет назначать свойству
+        highlighted значение true.*/
+
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+            this.edit = function (text) {
+                this.text = text;
+            }
+        }
+
+        let post1 = new Post('Frank', 'hello world', '2020-12-18');
+        console.log(post1);
+        post1.edit('Жили у бабуси два весёлых гуся');
+        console.log(post1);
+
+        class Post_es6 {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+        }
+        Post_es6.prototype.edit = function (text) {
+            this.text = text;
+        }
+        let post2 = new Post_es6('Peter', 'Lorem ipsum dolor sit amet.', '2020-12-18');
+        console.log(post2);
+        post2.edit('С Новым Голдом!');
+        console.log(post2);
+
+        function AttachedPost(author, text, date, highlighted) {
+            Post.call(this, author, text, date);
+            this.highlighted = false;
+
+        }
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+        AttachedPost.prototype.makeTextHighlighted = function () {
+            this.highlighted = true;
+        }
+        let attacmentPost1 = new AttachedPost('Vinni the Puh', 'Хорошо живёт на свете Винни-Пух', '2020-12-18');
+        attacmentPost1.makeTextHighlighted();
+        console.log(attacmentPost1);
+
+        class AttachedPost_es6 extends Post_es6 {
+            constructor(author, text, date, highlighted) {
+                super(author, text, date);
+                this.highlighted = false;
+            }
+            makeTextHighlighted_es6() {
+                this.highlighted = true;
+            }
+        }
+
+        let attacmentPost2 = new AttachedPost_es6('Ivan', 'Хорошо пошла!', '2020-12-18');
+        attacmentPost2.makeTextHighlighted_es6();
+        console.log(attacmentPost2);
+
+
+    </script>
+
+</body>
+
+</html>
