@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
+    <style>
+        i {
+            font-size: 50px;
+        }
+
+        .golden {
+            color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <i id="first" class="fas fa-star"></i>
+    <i id="second" class="fas fa-star"></i>
+    <i id="third" class="fas fa-star"></i>
+    <i id="fourth" class="fas fa-star"></i>
+    <i id="fifth" class="fas fa-star"></i>
+
+    <!-- Задание. Используя заготовку, сделайте чтобы при наведении на вторую звезду
+    подсвечивались первая и вторая звезды. При наведени на третью звезду подсвечивались
+    первая, вторая и третья звезды, и т.д. 
+    mouseover - это событие срабатывает когда мы наводим на элемент.
+    mouseout - это событие срабатывает когда мы перестаем наводить на элемент.
+	Вы можете пойти более продвинутым путем, и получать предыдущий элемент 
+	например с помощью https://mzl.la/3a4SPlR
+    -->
+
+    <script>
+        'use strict';
+        let firstStar = document.getElementById('first');
+        let secondStar = document.getElementById('second');
+        let thirdStar = document.getElementById('third');
+        let fourthStar = document.getElementById('fourth');
+        let fifthStar = document.getElementById('fifth');
+        let count = 0;
+        let goldenClass = 'golden';
+
+        function starLightUp(element) {
+
+            while (count > 0) {
+                if (!element.classList.contains('goldenClass')) {
+                    element.classList.add(goldenClass);
+                    if (element.previousElementSibling === null) {
+                        break;
+                    } else {
+                        element.previousElementSibling.classList.add(goldenClass);
+                        element = element.previousElementSibling;
+                        count--;
+                    }
+                }
+            }
+        }
+
+        function starBlackOut(element) {
+            while (count > 0) {
+                element.classList.remove(goldenClass);
+                if (element.previousElementSibling === null) {
+                    break;
+                } else {
+                    element.previousElementSibling.classList.remove(goldenClass);
+                    element = element.previousElementSibling;
+                    count--;
+                }
+            }
+        }
+
+
+        function lighting() {
+            switch (this.id) {
+                case 'first':
+                    count = 1;
+                    starLightUp(this);
+                    break;
+                case 'second':
+                    count = 2;
+                    starLightUp(this);
+                    break;
+                case 'third':
+                    count = 3;
+                    starLightUp(this);
+                    break;
+                case 'fourth':
+                    count = 4;
+                    starLightUp(this);
+                    break;
+                case 'fifth':
+                    count = 5;
+                    starLightUp(this);
+                    break;
+            }
+        }
+        function blackout() {
+            switch (this.id) {
+                case 'first':
+                    count = 1;
+                    starBlackOut(this);
+                    break;
+                case 'second':
+                    count = 2;
+                    starBlackOut(this);
+                    break;
+                case 'third':
+                    count = 3;
+                    starBlackOut(this);
+                    break;
+                case 'fourth':
+                    count = 4;
+                    starBlackOut(this);
+                    break;
+                case 'fifth':
+                    count = 5;
+                    starBlackOut(this);
+                    break;
+            }
+        }
+        firstStar.addEventListener('mouseover', lighting);
+        firstStar.addEventListener('mouseout', blackout)
+        secondStar.addEventListener('mouseover', lighting);
+        secondStar.addEventListener('mouseout', blackout)
+        thirdStar.addEventListener('mouseover', lighting);
+        thirdStar.addEventListener('mouseout', blackout)
+        fourthStar.addEventListener('mouseover', lighting);
+        fourthStar.addEventListener('mouseout', blackout)
+        fifthStar.addEventListener('mouseover', lighting);
+        fifthStar.addEventListener('mouseout', blackout)
+
+
+
+    </script>
+</body>
+
+</html>
