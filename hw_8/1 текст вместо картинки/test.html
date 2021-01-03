@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Добавить</button>
+    <script>
+        'use strict';
+        /*let obj1 = {
+            prop: 'text',
+
+            fn: () => {
+                alert(this.prop);
+            }
+        };
+        obj1.fn();*/
+        /* function one() {
+             console.log(this);
+         }
+         window.one();*/
+        /*const product = {
+
+            id: 23,
+            getId: function () {
+                alert(this.id);
+            },
+        }
+        window.setTimeout(product.getId(), 1000);*/
+        /*let myFn = () => {
+            console.log(this);
+        };
+        myFn.call(document);*/
+        /*const message = {
+
+            text: 'Hello world',
+            showText: function () {
+                setTimeout(() => {
+                    console.log(this.text);
+                }, 1000);
+            }
+        }
+        message.showText();*/
+        /*const product = {
+
+            id: 23,
+            getId: function () {
+                alert(this.id);
+            },
+        }
+        let newFn = product.getId.bind(product);
+        newFn();*/
+        /*function one() {
+            console.log(this);
+        }
+        one();*/
+        /*const message = {
+
+            text: 'Hello world',
+            showText: function () {
+                window.setTimeout(function () {
+                    console.log(this.text);
+                }, 1000);
+            }
+        }
+        message.showText();
+        const product = {
+
+            id: 23,
+            getId: function () {
+                alert(this.id);
+            },
+        }
+        setTimeout(product.getId, 1000);
+        class Product {
+            constructor() {
+                this.btn = document.querySelector('button');
+                this.btn.addEventListener('click', clickHandler);
+            }
+            clickHandler() {
+                console.log(this);
+            }
+        }
+
+        let prod1 = new Product();
+        let post = {
+            text: 'Lorem, ipsum',
+            show: () => {
+                console.log(this.text);
+            }
+        };
+        post.show();
+        let obj2 = {
+            prop: 'text',
+
+            fn: function () {
+                alert(this.prop);
+            }
+        };
+        obj2.fn();
+        let myFn = () => {
+            console.log(this);
+        };
+        myFn.call();
+        const product = {
+
+            id: 23,
+            getId: function () {
+                alert(this.id);
+            },
+        }
+        product.getId();*/
+        if (!(a in window)) {
+            var a = 1;
+        }
+        console.log(a);
+    </script>
+</body>
+
+</html>
