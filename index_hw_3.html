@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict';
+        /*
+        1. С помощью цикла for написать алгоритм для вывода чисел от 0 до 10 включительно, чтобы результат выглядел так:
+        0 – это ноль
+        1 – нечетное число
+        2 – четное число
+        3 – нечетное число
+        …
+        10 – четное число
+        Для решения этой задачи используйте остаток от деления на 2, подробнее здесь
+        */
+
+        let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let rezult = null;
+        for (let i = 0; i < numbers.length; i++) {
+            rezult = numbers[i] % 2;
+            if (numbers[i] == 0) {
+                console.log(numbers[i] + " - это ноль");
+            } else if (rezult == 0) {
+                console.log(numbers[i] + " - чётное число");
+            } else {
+                console.log(numbers[i] + " - нечётное число");
+            }
+
+        }
+
+
+        /*2. Выведите в консоль значения, указанные рядом с комментариями:*/
+
+        const post = {
+            author: "John", //вывести этот текст
+            postId: 23,
+            comments: [
+                {
+                    userId: 10,
+                    userName: "Alex",
+                    text: "lorem ipsum",
+                    rating: {
+                        likes: 10,
+                        dislikes: 2 //вывести это число
+                    }
+                },
+                {
+                    userId: 5, //вывести это число
+                    userName: "Jane",
+                    text: "lorem ipsum 2", //вывести этот текст
+                    rating: {
+                        likes: 3,
+                        dislikes: 1
+                    }
+                },
+            ]
+        };
+
+        console.log(post.author);
+        console.log(post.comments[0].rating.dislikes);
+        console.log(post.comments[1].userId + ", " + post.comments[1].text);
+
+        /*
+        3. Перед вами находится массив с продуктами, сегодня распродажа и вам нужно на каждый товар применить скидку
+        15%, можете использовать метод forEach https://mzl.la/1AOMMWX :
+        */
+
+        const products = [
+            {
+                id: 3,
+                price: 200,
+            },
+            {
+                id: 4,
+                price: 900,
+            },
+            {
+                id: 1,
+                price: 1000,
+            },
+        ];
+        products.forEach(function countFunc(element) {
+            element.price = element.price - (element.price * 15) / 100;
+        });
+        products.forEach(element => (element.price = (element.price * 100) / 85));
+        console.log(products);
+        products.forEach(element => (element.price = element.price - (element.price * 50) / 100));
+        console.log(products);
+
+        /*
+        4. Перед вами находится массив с продуктами в интернет-магазине. Вам нужно:
+        1. Получить все товары, у которых есть фотографии, можете использовать метод filter https://mzl.la/2qROQkT
+        2. Отсортируйте товары по цене (от низкой цены к высокой), можете использовать метод sort
+        https://mzl.la/2Y79hbZ , как устроен sort можно посмотреть например здесь https://youtu.be/O2pusOp0gC0
+        */
+
+        const products_ex_4 = [
+            {
+                id: 3,
+                price: 127,
+                photos: [
+                    "1.jpg",
+                    "2.jpg",
+                ]
+            },
+            {
+                id: 5,
+                price: 499,
+                photos: []
+            },
+            {
+                id: 10,
+                price: 26,
+                photos: [
+                    "3.jpg"
+                ]
+            },
+            {
+                id: 8,
+                price: 78,
+            },
+        ];
+
+        /**
+        * Цункция проверяет есть ли у текущего объекта из массива свойство photos и есть ли в нём какие-либо значения
+        * @param {*} elem текущий элемент массива products_ex_4
+        */
+        //выбираем те элементы массива products_ex_4 в которых есть фотографии
+        function callbackFunc(elem) {
+            if (elem.photos !== undefined && elem.photos.length !== 0) {
+                return true;
+            } else { return false; }
+        }
+        let filtred = products_ex_4.filter(callbackFunc);
+        console.log(filtred);
+
+        // сортируем объекты в массиве по возрастанию значений свойства price
+        products_ex_4.sort(function (a, b) {
+            if (a.price > b.price) {
+                return 1;
+            }
+            if (a.price < b.price) {
+                return -1;
+            }
+            return 0;
+        });
+        console.log(products_ex_4);
+
+        /*5. (По желанию, т.к. такая особенность практически не используется) Вывести с помощью цикла for числа от 0 до 9,
+        НЕ используя тело цикла. То есть выглядеть должно примерно так:*/
+        function funcLog(num) {
+            console.log(num);
+            num++;
+            return num;
+        }
+
+        for (let i = 0; i < 10; i = funcLog(i)) { }
+
+        /*6. Нарисовать горку с помощью console.log (используя цикл for), как показано на рисунке,
+        только у вашей горки должно быть 20 рядов, а не 5:
+        */
+
+        let mountain = [];
+        let mountainRezult = null;
+        for (let i = 0; i < 20; i++) {
+            mountain.push('x');
+            mountainRezult = mountain.join('');
+            console.log(mountainRezult);
+
+        }
+
+        let text = "";
+        for (let i = 0; i < 20; i++) {
+            text = text + 'x';
+            console.log(text);
+        }
+
+    </script>
+</body>
+
+</html>
